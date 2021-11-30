@@ -4,6 +4,7 @@ from tkinter import *
 from tkinter.font import BOLD
 from PIL import Image,ImageDraw,ImageTk
 from tkinter import messagebox
+import random
 import os
 from tkinter import simpledialog
 from tkinter import Tk, Label, Button
@@ -114,6 +115,26 @@ status3 = Label(top,font=('arial',15,'bold'),fg='red3',bg='#fde5c4')
 status3.place(x=220,y=650)
 
 
+def correct_answer():
+    found = Label(top, text="congratulation You unlocked the treasure ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
+    found.place(x=50,y=470)
+
+def not_answered():
+    blank_answered = Label(top, text="You have not answered the question \n YOU LOOSE !", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
+    blank_answered.place(x=100,y=400)
+
+
+def restart_exit_button():
+    exit_restart= Label(top, text="Do you want to play again ? ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
+    exit_restart.place(x=200,y=550)
+
+    restart_game = tkinter.Button(top,text="Restart",border=2,font=(20),height= 2, width=10,fg = "white",bg = "red",command=restart)
+    restart_game.place(x=300,y=600)
+
+    exit_game = tkinter.Button(top, text="Exit", border=2,font=(20),height= 2, width=10,fg = "white",bg = "Green",command=exit)
+    exit_game.place(x=500,y=600)
+
+
 ################### EXIT FROM GAME ############
 def exit():
     top.destroy()
@@ -121,63 +142,83 @@ def exit():
 ################# RESTART GAME ###############
 def restart():
     top.destroy()
-    os.startfile("index.pyw")
+    os.startfile("Treasure.pyw")
 
 ############## CHECK TREASURE UNLOCKED OR NOT #############
 def check():
+    cnf.destroy()
+    strings = str(e2.get()) 
+    if number=='At which Number knife was placed ?':
+        if strings=='3':   
+            correct_answer()
+            restart_exit_button()
+
+        elif strings=='':
+            not_answered()
+            restart_exit_button()
+
+
+    elif number=='At which Number sward was placed ?':
+        if strings=='2':
+            correct_answer()
+            restart_exit_button()
+
+        elif strings=='':
+            not_answered()
+            restart_exit_button()
+
     
-    global e1
-    string = int(e1.get()) 
-    if string==3:
-        your_answer.destroy()
-        question_1.destroy()
-        e1.destroy()
-        question.destroy()
-        cnf.destroy()
-        found = Label(top, text="congratulation You unlocked the treasure ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
-        found.pack(pady=(100, 0)) 
+    elif number=='At which Number Beast was placed ?':
+        if strings=='1':
+            correct_answer()
+            restart_exit_button()
 
-        exit_restart= Label(top, text="Do you want to play again ? ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
-        exit_restart.pack(pady=(80, 50)) 
+        elif strings=='':
+            not_answered()
+            restart_exit_button()
 
-        restart_game = tkinter.Button(top,text="Restart",border=2,font=(20),height= 2, width=10,fg = "white",bg = "red",command=restart)
-        restart_game.place(x=300,y=300)
+        
+    elif number=='At which Number zombies were placed ?':
+        if strings=='4':
+            correct_answer()
+            restart_exit_button()
 
-        exit_game = tkinter.Button(top, text="Exit", border=2,font=(20),height= 2, width=10,fg = "white",bg = "Green",command=exit)
-        exit_game.place(x=500,y=300)
+        elif strings=='':
+            not_answered()
+            restart_exit_button()
+        
     else:
-        question_1.destroy()
-        your_answer.destroy()
-        e1.destroy()
-        question.destroy()
-        cnf.destroy()
         not_found = Label(top, text="You answered wrong you loose  ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
-        not_found.pack(pady=(100, 0))
-
-        exit_restart= Label(top, text="Do you want to play again ? ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
-        exit_restart.pack(pady=(80, 50)) 
-
-        restart_game = tkinter.Button(top,text="Restart",border=2,font=(20),height= 2, width=10,fg = "white",bg = "red",command=restart)
-        restart_game.place(x=300,y=300)
-
-        exit_game = tkinter.Button(top, text="Exit", border=2,font=(20),height= 2, width=10,fg = "white",bg = "Green",command=exit)
-        exit_game.place(x=500,y=300)
+        not_found.place(x=200,y=400)
+        restart_exit_button()
+        
              
 ################ QUESTION TO UNLOCK TREASURE ##################
 def qus1():
+    question.destroy()
+    get_question.destroy()
+    click_here.destroy()
     global question_1
     global cnf
-    global e1
+    global e2
     global your_answer
-    question_1 = Label(top, text="Knife was placed at which Number 1,2,3,4 ?", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
-    question_1.pack(pady=(0, 50))  
+    global l2
+
+    l2 = tkinter.Label(bg="#F39C12",font=("Arial",30),text="")
+    l2.place(x=150,y=130)
+    global number 
+    list = ["At which Number knife was placed ?","At which Number sward was placed ?","At which Number Beast was placed ?","At which Number zombies were placed ?"]
+    number = ""
+    for i in range(4):
+        number = random.choice(list)
+    l2.config(text = number)  
 
     your_answer = Label(top, text="Your Answer ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
-    your_answer.place(x=100,y=375)  
-    e1 =tkinter.Entry(top,font=( 20),border=2,bg='#fde5c4')
-    e1.pack(pady=(0,0))
-    cnf = tkinter.Button(top,text="Check Answer",border=2,font=(15),height= 2, width=17,fg = "white",bg = "red",command=lambda: [check()])
-    cnf.pack(pady=(100, 100)) 
+    your_answer.place(x=150,y=200)  
+    e2 =tkinter.Entry(top,font=( 20),border=2,bg='#fde5c4')
+    e2.place(x=500,y=210)
+    cnf = tkinter.Button(top,text="Check Answer",border=2,font=(15),height= 2, width=17,fg = "white",bg = "red",command=check)
+    cnf.place(x=300,y=300) 
 
 
 ################## CONFIRMATION OF TOOL SELECTION #############
@@ -198,10 +239,18 @@ def result():
     global wrong_answer
     global label_win
     global label_loose
+    global get_question
+    global click_here
+    
     if USER_INP==USER:
-        question = Label(top, text="HURRY!! \n You found the treasure ! \n \n Now you have to answer the question \n to unlock the treasure", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
-        question.pack(pady=(50, 50)) 
-        qus1() 
+        question = Label(top, text="HURRY!! \n You found the treasure ! \n \n \n Now you have to answer One question \n to unlock the treasure", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
+        question.pack(pady=(50, 50))
+
+        click_here= Label(top, text="Click the button below to get your question", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
+        click_here.pack(pady=(400, 280)) 
+       
+        get_question = tkinter.Button(top, text="Click Here", border=2,font=(25),height= 3, width=15,fg = "white",bg = "Green",command=qus1)
+        get_question.place(x=400,y=300)
 
     elif USER=="":
         question_blank = Label(top, text="You have not answered. ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
