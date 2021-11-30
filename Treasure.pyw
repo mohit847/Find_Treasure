@@ -116,8 +116,8 @@ status3.place(x=220,y=650)
 
 
 def correct_answer():
-    found = Label(top, text="congratulation You unlocked the treasure ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
-    found.place(x=50,y=470)
+    found = Label(top, text="congratulation You unlocked the treasure \n YOU WIN ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
+    found.place(x=50,y=450)
 
 def not_answered():
     blank_answered = Label(top, text="You have not answered the question \n YOU LOOSE !", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
@@ -156,6 +156,10 @@ def check():
         elif strings=='':
             not_answered()
             restart_exit_button()
+        else:
+            not_found = Label(top, text="You answered wrong \n you loose  ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
+            not_found.place(x=200,y=400)
+            restart_exit_button()
 
 
     elif number=='At which Number sward was placed ?':
@@ -165,6 +169,10 @@ def check():
 
         elif strings=='':
             not_answered()
+            restart_exit_button()
+        else:
+            not_found = Label(top, text="You answered wrong you loose  ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
+            not_found.place(x=200,y=400)
             restart_exit_button()
 
     
@@ -176,6 +184,10 @@ def check():
         elif strings=='':
             not_answered()
             restart_exit_button()
+        else:
+            not_found = Label(top, text="You answered wrong you loose  ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
+            not_found.place(x=200,y=400)
+            restart_exit_button()
 
         
     elif number=='At which Number zombies were placed ?':
@@ -186,11 +198,12 @@ def check():
         elif strings=='':
             not_answered()
             restart_exit_button()
+        else:
+            not_found = Label(top, text="You answered wrong you loose  ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
+            not_found.place(x=200,y=400)
+            restart_exit_button()
         
-    else:
-        not_found = Label(top, text="You answered wrong you loose  ", font=("Copperplate Gothic Bold", 25, "bold"),bg='#fde5c4')
-        not_found.place(x=200,y=400)
-        restart_exit_button()
+    
         
              
 ################ QUESTION TO UNLOCK TREASURE ##################
